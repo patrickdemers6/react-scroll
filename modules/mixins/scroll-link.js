@@ -4,6 +4,7 @@ import scrollSpy from './scroll-spy';
 import defaultScroller from './scroller';
 import PropTypes from 'prop-types';
 import scrollHash from './scroll-hash';
+import { KEY_ENTER, KEY_SPACE } from '../utils/keys';
 
 const protoTypes = {
   to: PropTypes.string.isRequired,
@@ -67,6 +68,11 @@ export default (Component, customScroller) => {
 
     }
 
+    handleKeyPress = (event) => {
+      if (event.key === KEY_ENTER || event.key === KEY_SPACE)
+        this.handleClick(event);
+    }
+
     spyHandler = (x, y) => {
       let scrollSpyContainer = this.getScrollSpyContainer();
 
@@ -74,7 +80,7 @@ export default (Component, customScroller) => {
         return;
       }
 
-      const {horizontal} = this.props;
+      const { horizontal } = this.props;
       let to = this.props.to;
       let element = null;
       let isInside;
@@ -217,6 +223,8 @@ export default (Component, customScroller) => {
 
       props.className = className;
       props.onClick = this.handleClick;
+      props.onKeyPress = this.handleKeyPress;
+      props.tabIndex = 0;
 
 
       return React.createElement(Component, props);
