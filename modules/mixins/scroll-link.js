@@ -225,6 +225,7 @@ export default (Component, customScroller) => {
       props.onClick = this.handleClick;
       props.onKeyPress = this.handleKeyPress;
       props.tabIndex = 0;
+      props.href = this.props.href || "";
 
 
       return React.createElement(Component, props);
